@@ -256,8 +256,8 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;  /* Full viewport width */
-      height: 100vh; /* Full viewport height */
+      width: 100vw;
+      height: 100vh;
       background-color: rgba(0, 0, 0, 0.85);
       justify-content: center;
       align-items: center;
@@ -459,13 +459,13 @@
         Instagram: <a href="https://instagram.com/nairobipixel" target="_blank" style="color:#D4AF37; text-decoration: none;">@nairobipixel</a>
       </p>
       <p style="margin: 10px 0; font-size: 1rem; color: #fff;">
-        Phone/WhatsApp: <a href="https://wa.me/254700370377" target="_blank" style="color:#D4AF37; text-decoration: none;">+254 700370377</a>
+        Phone/WhatsApp: <a href="https://wa.me/254712345678" target="_blank" style="color:#D4AF37; text-decoration: none;">+254 712 345678</a>
       </p>
 
       <div style="margin: 30px 0;">
         <a href="https://instagram.com/nairobipixel" target="_blank" style="margin: 0 10px; color: #D4AF37;"><i class="fab fa-instagram fa-lg"></i></a>
         <a href="mailto:info@nairobipixel.com" style="margin: 0 10px; color: #D4AF37;"><i class="fas fa-envelope fa-lg"></i></a>
-        <a href="https://wa.me/254700370377" target="_blank" style="margin: 0 10px; color: #D4AF37;"><i class="fab fa-whatsapp fa-lg"></i></a>
+        <a href="https://wa.me/254712345678" target="_blank" style="margin: 0 10px; color: #D4AF37;"><i class="fab fa-whatsapp fa-lg"></i></a>
       </div>
 
       <a href="#contact" class="contact-btn">
@@ -479,7 +479,7 @@
   </footer>
 
   <!-- WhatsApp Floating Button with Real Icon -->
-  <a href="https://wa.me/254700370377" class="whatsapp-button" target="_blank">
+  <a href="https://wa.me/254712345678" class="whatsapp-button" target="_blank">
     <i class="fab fa-whatsapp"></i>
   </a>
 
@@ -529,13 +529,13 @@
       lightbox.style.display = 'flex';
     }
 
+    // Updated closeLightbox: resets scroll position of the lightbox-content container
     function closeLightbox() {
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImages = document.getElementById('lightbox-images');
-  lightbox.style.display = 'none';
-  // Reset the scroll position to the top
-  lightboxImages.scrollTop = 0;
-}
+      const lightbox = document.getElementById('lightbox');
+      const lightboxContent = document.querySelector('.lightbox-content');
+      lightbox.style.display = 'none';
+      lightboxContent.scrollTop = 0;
+    }
 
     // Smooth scroll for CTA button in hero
     document.querySelectorAll('.cta-button').forEach(btn => {
