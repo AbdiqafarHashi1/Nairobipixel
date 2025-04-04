@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
+    /* Global Styles */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
@@ -155,78 +156,118 @@
       cursor: pointer;
     }
 
-    /* Lightbox */
-    .lightbox {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(15, 15, 15, 0.95);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
+    /* Pricing Section */
+    #pricing {
+      background-color: #0B0B0B;
+      color: #fff;
+      padding: 80px 20px;
     }
-    .lightbox-content {
-      max-width: 90%;
-      max-height: 90%;
-      overflow-y: auto;
-      padding: 20px;
-      background: #111;
-      border-radius: 8px;
-    }
-    .lightbox-images {
+    .pricing-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
     }
-    .lightbox-images img {
-      width: 100%;
-      border-radius: 6px;
-    }
-    .close-btn {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      color: #D4AF37;
-      font-size: 2rem;
+    .pricing-card {
+      background: #111;
+      padding: 30px;
+      border-radius: 8px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
     }
+    .pricing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.15);
+    }
+    .pricing-card h3 {
+      color: #D4AF37;
+      margin-bottom: 20px;
+    }
+    .pricing-card p.price {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+    .pricing-card ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+      color: #ccc;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+    .pricing-card ul li {
+      margin-bottom: 8px;
+      padding-left: 20px;
+      position: relative;
+    }
+    .pricing-card ul li:before {
+      content: "•";
+      color: #D4AF37;
+      position: absolute;
+      left: 0;
+    }
+    .pricing-card button {
+      background-color: #D4AF37;
+      border: none;
+      padding: 10px 20px;
+      color: #111;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      margin-top: auto;
+    }
+    .pricing-card button:hover {
+      background-color: #c8a634;
+      transform: scale(1.05);
+    }
 
-    /* Fade-in animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .fade-out {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .fade-in {
-      opacity: 1 !important;
-      transform: translateY(0) !important;
+    /* About Section */
+    #about {
+      background-color: #0B0B0B;
+      color: #fff;
+      padding: 80px 20px;
     }
 
-    @media screen and (max-width: 768px) {
-      nav {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        background: #000;
-        right: 20px;
-        top: 60px;
-        padding: 10px;
-        border-radius: 4px;
-      }
-      .mobile-toggle {
-        display: block;
-        background: none;
-        color: #D4AF37;
-        font-size: 1.5rem;
-        border: none;
-      }
+    /* Footer */
+    footer {
+      background: #0B0B0B;
+      padding: 60px 20px 40px;
+      color: #fff;
+    }
+    footer .container {
+      text-align: center;
+      max-width: 600px;
+      margin: auto;
+    }
+    footer h2 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      color: #D4AF37;
+    }
+    footer p {
+      margin: 10px 0;
+      font-size: 1rem;
+    }
+    footer a {
+      color: #D4AF37;
+      text-decoration: none;
+    }
+    .contact-btn {
+      display: inline-block;
+      background-color: #D4AF37;
+      color: #111;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .contact-btn:hover {
+      background-color: #c8a634;
+      transform: scale(1.05);
     }
 
     /* WhatsApp Button */
@@ -250,8 +291,8 @@
       background: #1EBE57;
     }
 
-    /* Updated Modal Styles */
-    .modal {
+    /* Lightbox & Modal Styles */
+    .lightbox, .modal {
       display: none;
       position: fixed;
       top: 0;
@@ -263,13 +304,35 @@
       align-items: center;
       z-index: 9999;
     }
-    .modal-content {
+    .lightbox-content, .modal-content {
       background-color: #111;
       padding: 30px;
       border-radius: 8px;
       max-width: 500px;
       color: #fff;
       box-shadow: 0 0 10px #000;
+    }
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 90%;
+      overflow-y: auto;
+    }
+    .lightbox-images {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .lightbox-images img {
+      width: 100%;
+      border-radius: 6px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #D4AF37;
+      font-size: 2rem;
+      cursor: pointer;
     }
     .modal-content ul {
       padding-left: 20px;
@@ -290,30 +353,41 @@
       border: none;
       border-radius: 4px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
     .modal-content button:hover {
       background-color: #444;
     }
 
-    /* Contact Us Button Hover (Footer) */
-    .contact-btn {
-      display: inline-block;
-      background-color: #D4AF37;
-      color: #111;
-      font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: background-color 0.3s ease, transform 0.3s ease;
+    /* Responsive Adjustments */
+    @media (max-width: 480px) {
+      h2 { font-size: 1.5rem; }
+      .pricing-card p.price { font-size: 1.4rem; }
     }
-    .contact-btn:hover {
-      background-color: #c8a634;
-      transform: scale(1.05);
+
+    /* Mobile Menu */
+    @media screen and (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        background: #000;
+        right: 20px;
+        top: 60px;
+        padding: 10px;
+        border-radius: 4px;
+      }
+      .mobile-toggle {
+        display: block;
+        background: none;
+        color: #D4AF37;
+        font-size: 1.5rem;
+        border: none;
+      }
     }
   </style>
 </head>
 <body onload="hideLoader()">
-
   <!-- Header -->
   <header>
     <div class="container header-content">
@@ -322,6 +396,7 @@
       <nav id="navbar">
         <a href="#work">Our Work</a>
         <a href="#services">Services</a>
+        <a href="#pricing">Pricing</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -411,6 +486,57 @@
     </div>
   </section>
 
+  <!-- Pricing Section -->
+  <section id="pricing" class="fade-out">
+    <div class="container">
+      <h2 class="gold" style="text-align: center; font-size: 2rem; margin-bottom: 40px;">Pricing</h2>
+      <div class="pricing-grid">
+        <!-- Basic Package -->
+        <div class="pricing-card">
+          <h3>Basic Package</h3>
+          <p class="price">$149</p>
+          <ul>
+            <li>Responsive Web Design</li>
+            <li>Up to 5 Custom Pages</li>
+            <li>Basic SEO Setup</li>
+            <li>Social Media Integration</li>
+            <li>Standard Branding</li>
+          </ul>
+          <button>Select Basic</button>
+        </div>
+        <!-- Standard Package -->
+        <div class="pricing-card">
+          <h3>Standard Package</h3>
+          <p class="price">$249</p>
+          <ul>
+            <li>All Basic Features</li>
+            <li>Up to 10 Custom Pages</li>
+            <li>Advanced SEO Optimization</li>
+            <li>Social Media Management</li>
+            <li>Custom Branding & Identity</li>
+            <li>Analytics Integration</li>
+          </ul>
+          <button>Select Standard</button>
+        </div>
+        <!-- Premium Package -->
+        <div class="pricing-card">
+          <h3>Premium Package</h3>
+          <p class="price">$399</p>
+          <ul>
+            <li>All Standard Features</li>
+            <li>Unlimited Custom Pages</li>
+            <li>Premium SEO & Conversion Optimization</li>
+            <li>Comprehensive Social Media Strategy</li>
+            <li>Custom Branding & Visual Identity</li>
+            <li>E-commerce Integration</li>
+            <li>Priority Support & Maintenance</li>
+          </ul>
+          <button>Select Premium</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- About Section -->
   <section id="about" class="fade-out" style="background-color: #0B0B0B; color: #fff; padding: 80px 20px;">
     <div class="container">
@@ -461,18 +587,13 @@
       <p style="margin: 10px 0; font-size: 1rem; color: #fff;">
         Phone/WhatsApp: <a href="https://wa.me/254700370377" target="_blank" style="color:#D4AF37; text-decoration: none;">+254 700 370377</a>
       </p>
-
       <div style="margin: 30px 0;">
         <a href="" target="_blank" style="margin: 0 10px; color: #D4AF37;"><i class="fab fa-instagram fa-lg"></i></a>
         <a href="mailto:info@nairobipixel.com" style="margin: 0 10px; color: #D4AF37;"><i class="fas fa-envelope fa-lg"></i></a>
         <a href="https://wa.me/254700370377" target="_blank" style="margin: 0 10px; color: #D4AF37;"><i class="fab fa-whatsapp fa-lg"></i></a>
       </div>
-
-      <a href="#contact" class="contact-btn">
-        Contact Us
-      </a>
+      <a href="#contact" class="contact-btn">Contact Us</a>
     </div>
-
     <div style="text-align:center; font-size:0.85rem; color:#777; border-top:1px solid #222; padding-top:20px; margin-top: 40px;">
       &copy; 2025 <span style="color:#D4AF37">NairobiPixel</span>. All rights reserved.
     </div>
@@ -517,18 +638,15 @@
     function toggleGallery(id) {
       const gallery = document.getElementById(id);
       const images = gallery.querySelectorAll('img');
-
       const lightbox = document.getElementById('lightbox');
       const lightboxImages = document.getElementById('lightbox-images');
       lightboxImages.innerHTML = '';
-
       images.forEach(img => {
         const clone = img.cloneNode();
         lightboxImages.appendChild(clone);
       });
-
       lightbox.style.display = 'flex';
-      // Use a short delay to allow rendering, then reset scroll
+      // Delay then reset scroll
       setTimeout(() => {
         const lightboxContent = document.querySelector('.lightbox-content');
         if (lightboxContent) {
@@ -563,7 +681,6 @@
         observer.unobserve(entry.target);
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
     faders.forEach(fader => {
       fader.classList.add('fade-out');
       appearOnScroll.observe(fader);
@@ -575,7 +692,6 @@
       const title = document.getElementById('modal-title');
       const desc = document.getElementById('modal-description');
       const list = document.getElementById('modal-list');
-
       const serviceDetails = {
         'Social Media Management': {
           description: 'We manage and grow your social media presence through:',
@@ -614,14 +730,12 @@
           ]
         }
       };
-
       if (serviceDetails[service]) {
         const data = serviceDetails[service];
         title.textContent = service;
         desc.textContent = data.description;
         list.innerHTML = data.items.map(item => `<li>${item}</li>`).join('');
       }
-
       modal.style.display = 'flex';
     }
 
