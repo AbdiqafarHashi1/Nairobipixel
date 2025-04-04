@@ -518,12 +518,19 @@
   <section id="pricing" class="fade-out">
     <div class="container">
       <h2 class="gold" style="text-align: center; margin-bottom: 40px;">Pricing</h2>
+      <div style="text-align: center; margin-bottom: 30px;">
+        <label for="currencyToggle" style="margin-right: 10px; font-weight: bold;">Currency:</label>
+        <select id="currencyToggle" onchange="toggleCurrency()" style="padding: 8px; border-radius: 4px; border: none;">
+          <option value="USD">USD ($)</option>
+          <option value="KES">KES (Ksh)</option>
+        </select>
+      </div>
+      
       <div class="pricing-grid">
         <!-- Basic Package -->
         <div class="pricing-card">
           <h3>Basic Package</h3>
-          <p class="price">$149</p>
-          <ul>
+          <p class="price" data-usd="149">$149</p>          <ul>
             <li>Responsive Web Design</li>
             <li>Up to 5 Custom Pages</li>
             <li>Basic SEO Setup</li>
@@ -535,7 +542,7 @@
         <!-- Standard Package -->
         <div class="pricing-card">
           <h3>Standard Package</h3>
-          <p class="price">$249</p>
+          <p class="price" data-usd="249">$249</p>
           <ul>
             <li>All Basic Features</li>
             <li>Up to 10 Custom Pages</li>
@@ -549,7 +556,7 @@
         <!-- Premium Package -->
         <div class="pricing-card">
           <h3>Premium Package</h3>
-          <p class="price">$399</p>
+          <p class="price" data-usd="399">$399</p>
           <ul>
             <li>All Standard Features</li>
             <li>Unlimited Custom Pages</li>
@@ -857,6 +864,39 @@ function closeContactModal() {
     </form>
       </div>
 </div>
+<script>
+  let exchangeRateKES = 0;
+
+  async function fetchExchangeRate() {
+    try {
+      const res = await fetch("https://open.er-api.com/v6/latest/USD");
+      const data = await res.json();
+      exchangeRateKES = data.rates.KES;
+    } catch (err) {
+      console.error("Exchange rate fetch failed:", err);
+      exchangeRateKES = 130; // fallback
+    }
+  }
+
+  function toggleCurrency() {
+    const selectedCurrency = document.getElementById("currencyToggle").value;
+    const priceTags = document.querySelectorAll(".price");
+
+    priceTags.forEach(tag => {
+      const usd = parseFloat(tag.dataset.usd);
+      if (selectedCurrency === "USD") {
+        tag.textContent = `$${usd}`;
+      } else {
+        const kes = Math.round(usd * exchangeRateKES);
+        tag.textContent = `Ksh ${kes}`;
+      }
+    });
+  }
+
+  fetchExchangeRate().then(() => {
+    toggleCurrency(); // Load KES values if selected by default
+  });
+</script>
 
 </body>
 </html>
