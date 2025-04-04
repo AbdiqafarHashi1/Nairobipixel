@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NairobiPixel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0B0B0B;
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    section {
+      padding: 80px 20px;
+    }
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+    .gold { color: #D4AF37; }
+    header {
+      background: #000;
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { color: #D4AF37; font-size: 1.5rem; font-weight: bold; }
+    nav { display: flex; gap: 24px; }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: #D4AF37; }
+    .mobile-toggle { display: none; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                  url('images/hero-bg.jpg') center center/cover no-repeat;
+      min-height: 75vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 40px 20px;
+      color: #fff;
+      background-attachment: fixed;
+    }
+    @media screen and (max-width: 768px) {
+      .hero {
+        min-height: 60vh;
+        background-attachment: scroll;
+      }
+    }
+    .hero h1 {
+      color: #D4AF37;
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 24px;
+    }
+    .hero p {
+      color: #ccc;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin: 0 auto 35px;
+      max-width: 650px;
+    }
+    button.cta-button {
+      margin-top: 0;
+      background-color: #D4AF37;
+      color: #111;
+      padding: 14px 28px;
+      font-weight: bold;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    button.cta-button:hover {
+      background-color: #c8a634;
+      transform: scale(1.05);
+    }
+
+    /* Portfolio & Services */
+    .portfolio-grid, .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+    .portfolio-item, .service-item {
+      background: #111;
+      padding: 24px;
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .portfolio-item:hover, .service-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.15);
+    }
+    .portfolio-item img, .gallery img {
+      width: 100%;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+    .gallery {
+      display: none;
+      margin-top: 30px;
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+    }
+    .gallery.show {
+      display: block;
+      opacity: 1;
+    }
+    .service-item i {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      display: block;
+      color: #D4AF37 !important;
+    }
+    .service-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .service-item button {
+      margin-top: 16px;
+      background-color: #D4AF37;
+      border: none;
+      padding: 8px 16px;
+      color: #111;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 15, 15, 0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 90%;
+      overflow-y: auto;
+      padding: 20px;
+      background: #111;
+      border-radius: 8px;
+    }
+    .lightbox-images {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .lightbox-images img {
+      width: 100%;
+      border-radius: 6px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #D4AF37;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    /* Fade-in animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-out {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    @media screen and (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        background: #000;
+        right: 20px;
+        top: 60px;
+        padding: 10px;
+        border-radius: 4px;
+      }
+      .mobile-toggle {
+        display: block;
+        background: none;
+        color: #D4AF37;
+        font-size: 1.5rem;
+        border: none;
+      }
+    }
+
+    /* WhatsApp Button */
+    .whatsapp-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: white;
+      font-size: 24px;
+      border-radius: 50%;
+      padding: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 999;
+      text-decoration: none;
+    }
+    .whatsapp-button:hover {
+      background: #1EBE57;
+    }
+
+    /* Updated Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;  /* Full viewport width */
+      height: 100vh; /* Full viewport height */
+      background-color: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .modal-content {
+      background-color: #111;
+      padding: 30px;
+      border-radius: 8px;
+      max-width: 500px;
+      color: #fff;
+      box-shadow: 0 0 10px #000;
+    }
+    .modal-content ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+    .modal-content ul li {
+      margin-bottom: 10px;
+    }
+    .modal-content h3 {
+      margin-bottom: 10px;
+      color: #D4AF37;
+    }
+    .modal-content button {
+      margin-top: 20px;
+      padding: 8px 16px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .modal-content button:hover {
+      background-color: #444;
+    }
+
+    /* Contact Us Button Hover (Footer) */
+    .contact-btn {
+      display: inline-block;
+      background-color: #D4AF37;
+      color: #111;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .contact-btn:hover {
+      background-color: #c8a634;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body onload="hideLoader()">
+
+  <!-- Header -->
+  <header>
+    <div class="container header-content">
+      <div class="logo">NairobiPixel</div>
+      <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
+      <nav id="navbar">
+        <a href="#work">Our Work</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero fade-out">
+    <div class="container">
+      <h1>Crafting Digital Presence<br>with Precision</h1>
+      <p>Web, Social, and Branding Services for Nairobi’s<br> Growing Businesses</p>
+      <button class="cta-button">Get Started</button>
+    </div>
+  </section>
+
+  <!-- Work Section -->
+  <section id="work" class="fade-out">
+    <div class="container">
+      <h2 class="gold">Our Work</h2>
+      <div class="portfolio-grid">
+        <div class="portfolio-item" onclick="toggleGallery('kenyos')">
+          KENYOS INTERIORS
+          <img src="images/kenyos.jpg" alt="Kenyos" />
+          <div class="gallery" id="kenyos">
+            <img src="images/kenyos1.jpg" />
+            <img src="images/kenyos2.jpg" />
+            <img src="images/kenyos3.jpg" />
+            <img src="images/kenyos4.jpg" />
+            <img src="images/kenyos5.jpg" />
+            <img src="images/kenyos6.jpg" />
+            <img src="images/kenyos7.jpg" />
+            <img src="images/kenyos8.jpg" />
+          </div>
+        </div>
+        <div class="portfolio-item" onclick="toggleGallery('beirut')">
+          BEIRUT
+          <img src="images/beirut.jpg" alt="Beirut" />
+          <div class="gallery" id="beirut">
+            <img src="images/beirut1.jpg" />
+            <img src="images/beirut2.jpg" />
+            <img src="images/beirut3.jpg" />
+            <img src="images/beirut4.jpg" />
+            <img src="images/beirut5.jpg" />
+            <img src="images/beirut6.jpg" />
+            <img src="images/beirut7.jpg" />
+          </div>
+        </div>
+        <div class="portfolio-item" onclick="toggleGallery('urban')">
+          URBAN FLAME
+          <img src="images/urbanflame.jpg" alt="Urban Flame" />
+          <div class="gallery" id="urban">
+            <img src="images/urban1.jpg" />
+            <img src="images/urban2.jpg" />
+            <img src="images/urban3.jpg" />
+            <img src="images/urban4.jpg" />
+            <img src="images/urban5.jpg" />
+            <img src="images/urban6.jpg" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="fade-out">
+    <div class="container">
+      <h2 class="gold">What We Do</h2>
+      <div class="services-grid">
+        <div class="service-item">
+          <i class="fas fa-share-alt"></i>
+          <span>Social Media Management</span>
+          <button onclick="openModal('Social Media Management')">Expand</button>
+        </div>
+        <div class="service-item">
+          <i class="fas fa-laptop-code"></i>
+          <span>Website Development</span>
+          <button onclick="openModal('Website Development')">Expand</button>
+        </div>
+        <div class="service-item">
+          <i class="fas fa-bullhorn"></i>
+          <span>Paid Advertising</span>
+          <button onclick="openModal('Paid Advertising')">Expand</button>
+        </div>
+        <div class="service-item">
+          <i class="fas fa-palette"></i>
+          <span>Branding</span>
+          <button onclick="openModal('Branding')">Expand</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="fade-out" style="background-color: #0B0B0B; color: #fff; padding: 80px 20px;">
+    <div class="container">
+      <h2 class="gold" style="text-align: center; font-size: 2rem; margin-bottom: 10px;">
+        Why <span style="color: #D4AF37;">NairobiPixel</span>?
+      </h2>
+      <p style="text-align: center; color: #aaa; max-width: 650px; margin: 0 auto 50px; font-size: 1rem;">
+        We help Nairobi’s brands stand out with a powerful online presence—built on bold design, smart content, and strategic execution.
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+        <div style="background:#111; padding: 30px; border-left: 4px solid transparent; border-radius: 8px; transition: border-color 0.3s ease;">
+          <p style="font-style: italic; color: #ccc;">
+            “Working with NairobiPixel completely transformed how customers discover our food. Our Instagram is now a magnet.”
+          </p>
+          <p style="color: #D4AF37; font-weight: 600; margin-top: 10px;">— Beirut Restaurant</p>
+        </div>
+        <div style="background:#111; padding: 30px; border-left: 4px solid transparent; border-radius: 8px; transition: border-color 0.3s ease;">
+          <p style="font-style: italic; color: #ccc;">
+            “From no website to a portfolio that closed 4 jobs in the first month. NairobiPixel is serious branding.”
+          </p>
+          <p style="color: #D4AF37; font-weight: 600; margin-top: 10px;">— Kenyos Interiors</p>
+        </div>
+        <div style="background:#111; padding: 30px; border-left: 4px solid transparent; border-radius: 8px; transition: border-color 0.3s ease;">
+          <p style="font-style: italic; color: #ccc;">
+            “The new branding made us look premium. Our online presence finally matches the taste of our food.”
+          </p>
+          <p style="color: #D4AF37; font-weight: 600; margin-top: 10px;">— Urban Flame</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <style>
+    #about .container > div:hover {
+      border-left-color: #D4AF37 !important;
+    }
+  </style>
+
+  <!-- Footer -->
+  <footer id="contact" class="fade-out" style="background:#0A0B0B; padding:60px 20px 40px;">
+    <div class="container" style="text-align:center; max-width: 600px; margin: auto;">
+      <h2 class="gold" style="margin-bottom: 20px; font-size: 1.8rem; color: #D4AF37;">Let’s Talk</h2>
+      <p style="margin: 10px 0; font-size: 1rem; color: #fff;">
+        Email: <a href="mailto:info@nairobipixel.com" style="color:#D4AF37; text-decoration: none;">info@nairobipixel.com</a>
+      </p>
+      <p style="margin: 10px 0; font-size: 1rem; color: #fff;">
+        Instagram: <a href="https://instagram.com/nairobipixel" target="_blank" style="color:#D4AF37; text-decoration: none;">@nairobipixel</a>
+      </p>
+      <p style="margin: 10px 0; font-size: 1rem; color: #fff;">
+        Phone/WhatsApp: <a href="https://wa.me/254712345678" target="_blank" style="color:#D4AF37; text-decoration: none;">+254 712 345678</a>
+      </p>
+
+      <div style="margin: 30px 0;">
+        <a href="https://instagram.com/nairobipixel" target="_blank" style="margin: 0 10px; color: #D4AF37;"><i class="fab fa-instagram fa-lg"></i></a>
+        <a href="mailto:info@nairobipixel.com" style="margin: 0 10px; color: #D4AF37;"><i class="fas fa-envelope fa-lg"></i></a>
+        <a href="https://wa.me/254712345678" target="_blank" style="margin: 0 10px; color: #D4AF37;"><i class="fab fa-whatsapp fa-lg"></i></a>
+      </div>
+
+      <a href="#contact" class="contact-btn">
+        Contact Us
+      </a>
+    </div>
+
+    <div style="text-align:center; font-size:0.85rem; color:#777; border-top:1px solid #222; padding-top:20px; margin-top: 40px;">
+      &copy; 2025 <span style="color:#D4AF37">NairobiPixel</span>. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/254712345678" class="whatsapp-button" target="_blank">💬</a>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <span class="close-btn" onclick="closeLightbox()">&times;</span>
+      <div id="lightbox-images" class="lightbox-images"></div>
+    </div>
+  </div>
+
+  <!-- Service Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content" id="modal-content">
+      <h3 id="modal-title"></h3>
+      <p id="modal-description"></p>
+      <ul id="modal-list"></ul>
+      <button onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('navbar');
+      nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+      nav.style.flexDirection = 'column';
+    }
+
+    function hideLoader() {
+      const loader = document.getElementById('loader');
+      if (loader) loader.style.display = 'none';
+    }
+
+    function toggleGallery(id) {
+      const gallery = document.getElementById(id);
+      const images = gallery.querySelectorAll('img');
+
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImages = document.getElementById('lightbox-images');
+      lightboxImages.innerHTML = '';
+
+      images.forEach(img => {
+        const clone = img.cloneNode();
+        lightboxImages.appendChild(clone);
+      });
+
+      lightbox.style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+
+    // Smooth scroll for CTA button in hero
+    document.querySelectorAll('.cta-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Fade-in animation for sections and footer
+    const faders = document.querySelectorAll('section, footer');
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('fade-in');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    faders.forEach(fader => {
+      fader.classList.add('fade-out');
+      appearOnScroll.observe(fader);
+    });
+
+    // Modal for Services
+    function openModal(service) {
+      const modal = document.getElementById('modal');
+      const title = document.getElementById('modal-title');
+      const desc = document.getElementById('modal-description');
+      const list = document.getElementById('modal-list');
+
+      const serviceDetails = {
+        'Social Media Management': {
+          description: 'We manage and grow your social media presence through:',
+          items: [
+            'Content creation and scheduling',
+            'Engagement strategies',
+            'Performance tracking',
+            'Platform-specific growth plans'
+          ]
+        },
+        'Website Development': {
+          description: 'From design to deployment, we build high-performing sites:',
+          items: [
+            'Responsive website design',
+            'E-commerce integration',
+            'SEO optimization',
+            'Custom development'
+          ]
+        },
+        'Paid Advertising': {
+          description: 'Maximize ROI through strategic ad placements:',
+          items: [
+            'Facebook & Instagram Ads',
+            'Google Ads (Search & Display)',
+            'A/B Testing and optimization',
+            'Conversion tracking'
+          ]
+        },
+        'Branding': {
+          description: 'Build a powerful and cohesive brand identity:',
+          items: [
+            'Logo & color palette design',
+            'Brand voice and messaging',
+            'Business cards & collateral',
+            'Visual brand guidelines'
+          ]
+        }
+      };
+
+      if (serviceDetails[service]) {
+        const data = serviceDetails[service];
+        title.textContent = service;
+        desc.textContent = data.description;
+        list.innerHTML = data.items.map(item => `<li>${item}</li>`).join('');
+      }
+
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
