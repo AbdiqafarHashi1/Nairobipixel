@@ -2,10 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!-- Responsive Meta Tag -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NairobiPixel</title>
+  <!-- SEO Meta Tags -->
+  <title>NairobiPixel - Digital Presence Crafted with Precision</title>
+  <meta name="description" content="NairobiPixel provides digital marketing, web design, social media management, and branding services for growing businesses in Nairobi. We craft a powerful online presence with precision and creativity." />
+  <meta name="keywords" content="NairobiPixel, Digital Marketing, Web Design, Social Media Management, Branding, SMMA, Nairobi" />
+  <meta name="robots" content="index, follow" />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:title" content="NairobiPixel - Digital Presence Crafted with Precision" />
+  <meta property="og:description" content="Discover how NairobiPixel helps brands stand out with powerful digital marketing, web design, and branding services." />
+  <meta property="og:image" content="images/hero-bg.jpg" />
+  <meta property="og:url" content="https://nairobiPixel.netlify.com" />
+  <meta property="og:type" content="website" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="NairobiPixel - Digital Presence Crafted with Precision" />
+  <meta name="twitter:description" content="Discover how NairobiPixel helps brands stand out with powerful digital marketing, web design, and branding services." />
+  <meta name="twitter:image" content="images/hero-bg.jpg" />
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+  <!-- External Fonts & Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Internal CSS -->
   <style>
     /* Global Styles */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -122,6 +144,8 @@
       width: 100%;
       border-radius: 6px;
       margin-top: 10px;
+      /* Lazy load images */
+      loading: lazy;
     }
     .gallery {
       display: none;
@@ -291,7 +315,7 @@
       background: #1EBE57;
     }
 
-    /* Lightbox & Service Modal Styles */
+    /* Lightbox & Modal Styles */
     .lightbox, .modal {
       display: none;
       position: fixed;
@@ -325,6 +349,7 @@
     .lightbox-images img {
       width: 100%;
       border-radius: 6px;
+      loading: lazy;
     }
     .close-btn {
       position: absolute;
@@ -359,10 +384,9 @@
       background-color: #444;
     }
 
-    /* Pricing Modal Styles */
-    /* We'll reuse .modal and .modal-content classes for the pricing modal */
-    /* Add custom styles if needed in the pricing modal markup below */
-
+    /* Pricing Modal Styles (for Package Selection) */
+    /* Using same .modal and .modal-content classes */
+    
     /* Responsive Adjustments */
     @media (max-width: 480px) {
       h2 { font-size: 1.5rem; }
@@ -423,38 +447,38 @@
       <div class="portfolio-grid">
         <div class="portfolio-item" onclick="toggleGallery('kenyos')">
           KENYOS INTERIORS
-          <img src="images/kenyos.jpg" alt="Kenyos" />
+          <img src="images/kenyos.jpg" alt="Kenyos" loading="lazy" />
           <div class="gallery" id="kenyos">
-            <img src="images/kenyos1.jpg" />
-            <img src="images/kenyos2.jpg" />
-            <img src="images/kenyos3.jpg" />
-            <img src="images/kenyos4.jpg" />
-            <img src="images/kenyos5.jpg" />
-            <img src="images/kenyos6.jpg" />
-            <img src="images/kenyos7.jpg" />
-            <img src="images/kenyos8.jpg" />
+            <img src="images/kenyos1.jpg" alt="Kenyos 1" loading="lazy" />
+            <img src="images/kenyos2.jpg" alt="Kenyos 2" loading="lazy" />
+            <img src="images/kenyos3.jpg" alt="Kenyos 3" loading="lazy" />
+            <img src="images/kenyos4.jpg" alt="Kenyos 4" loading="lazy" />
+            <img src="images/kenyos5.jpg" alt="Kenyos 5" loading="lazy" />
+            <img src="images/kenyos6.jpg" alt="Kenyos 6" loading="lazy" />
+            <img src="images/kenyos7.jpg" alt="Kenyos 7" loading="lazy" />
+            <img src="images/kenyos8.jpg" alt="Kenyos 8" loading="lazy" />
           </div>
         </div>
         <div class="portfolio-item" onclick="toggleGallery('beirut')">
           BEIRUT
-          <img src="images/beirut.jpg" alt="Beirut" />
+          <img src="images/beirut.jpg" alt="Beirut" loading="lazy" />
           <div class="gallery" id="beirut">
-            <img src="images/beirut1.jpg" />
-            <img src="images/beirut2.jpg" />
-            <img src="images/beirut3.jpg" />
-            <img src="images/beirut4.jpg" />
+            <img src="images/beirut1.jpg" alt="Beirut 1" loading="lazy" />
+            <img src="images/beirut2.jpg" alt="Beirut 2" loading="lazy" />
+            <img src="images/beirut3.jpg" alt="Beirut 3" loading="lazy" />
+            <img src="images/beirut4.jpg" alt="Beirut 4" loading="lazy" />
           </div>
         </div>
         <div class="portfolio-item" onclick="toggleGallery('urban')">
           URBAN FLAME
-          <img src="images/urbanflame.jpg" alt="Urban Flame" />
+          <img src="images/urbanflame.jpg" alt="Urban Flame" loading="lazy" />
           <div class="gallery" id="urban">
-            <img src="images/urban1.jpg" />
-            <img src="images/urban2.jpg" />
-            <img src="images/urban3.jpg" />
-            <img src="images/urban4.jpg" />
-            <img src="images/urban5.jpg" />
-            <img src="images/urban6.jpg" />
+            <img src="images/urban1.jpg" alt="Urban 1" loading="lazy" />
+            <img src="images/urban2.jpg" alt="Urban 2" loading="lazy" />
+            <img src="images/urban3.jpg" alt="Urban 3" loading="lazy" />
+            <img src="images/urban4.jpg" alt="Urban 4" loading="lazy" />
+            <img src="images/urban5.jpg" alt="Urban 5" loading="lazy" />
+            <img src="images/urban6.jpg" alt="Urban 6" loading="lazy" />
           </div>
         </div>
       </div>
@@ -541,7 +565,7 @@
     </div>
   </section>
 
-  <!-- Pricing Modal (for package selection) -->
+  <!-- Pricing Modal -->
   <div class="modal" id="pricingModal" onclick="closePricingModal()">
     <div class="modal-content" id="pricingModalContent" onclick="event.stopPropagation()">
       <h3 id="pricingModalTitle"></h3>
@@ -603,7 +627,7 @@
   </style>
 
   <!-- Footer -->
-  <footer id="contact" class="fade-out" style="background:#0B0B0B; padding: 60px 20px 40px;">
+  <footer id="contact" class="fade-out" style="background:#0B0B0B; padding:60px 20px 40px;">
     <div class="container" style="text-align:center; max-width: 600px; margin: auto;">
       <h2 class="gold" style="margin-bottom: 20px; font-size: 1.8rem;">Let’s Talk</h2>
       <p style="margin: 10px 0; font-size: 1rem;">
@@ -627,7 +651,7 @@
     </div>
   </footer>
 
-  <!-- WhatsApp Floating Button with Real Icon -->
+  <!-- WhatsApp Floating Button -->
   <a href="https://wa.me/254700370377" class="whatsapp-button" target="_blank">
     <i class="fab fa-whatsapp"></i>
   </a>
@@ -680,10 +704,12 @@
       nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
       nav.style.flexDirection = 'column';
     }
+
     function hideLoader() {
       const loader = document.getElementById('loader');
       if (loader) loader.style.display = 'none';
     }
+
     // Reset scroll on gallery open
     function toggleGallery(id) {
       const gallery = document.getElementById(id);
@@ -698,11 +724,10 @@
       lightbox.style.display = 'flex';
       setTimeout(() => {
         const lightboxContent = document.querySelector('.lightbox-content');
-        if (lightboxContent) {
-          lightboxContent.scrollTop = 0;
-        }
+        if (lightboxContent) { lightboxContent.scrollTop = 0; }
       }, 50);
     }
+
     // Reset scroll on lightbox close
     function closeLightbox() {
       const lightbox = document.getElementById('lightbox');
@@ -710,12 +735,14 @@
       if (lightboxContent) { lightboxContent.scrollTop = 0; }
       lightbox.style.display = 'none';
     }
+
     // Smooth scroll for CTA button in hero
     document.querySelectorAll('.cta-button').forEach(btn => {
       btn.addEventListener('click', () => {
         document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
       });
     });
+
     // Fade-in animation for sections and footer
     const faders = document.querySelectorAll('section, footer');
     const appearOnScroll = new IntersectionObserver((entries, observer) => {
@@ -729,6 +756,7 @@
       fader.classList.add('fade-out');
       appearOnScroll.observe(fader);
     });
+
     // Modal for Services
     function openModal(service) {
       const modal = document.getElementById('modal');
@@ -782,15 +810,14 @@
       modal.style.display = 'flex';
     }
     function closeModal() { document.getElementById('modal').style.display = 'none'; }
+
     // Open Pricing Modal (for package selection)
     function openPricingModal(packageName) {
       document.getElementById('pricingModalTitle').textContent = "Select " + packageName;
       document.getElementById('selectedPackage').value = packageName;
       document.getElementById('pricingModal').style.display = 'flex';
     }
-    function closePricingModal() {
-      document.getElementById('pricingModal').style.display = 'none';
-    }
+    function closePricingModal() { document.getElementById('pricingModal').style.display = 'none'; }
   </script>
 </body>
 </html>
