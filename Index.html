@@ -242,6 +242,9 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       z-index: 999;
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .whatsapp-button:hover {
       background: #1EBE57;
@@ -361,9 +364,6 @@
             <img src="images/beirut2.jpg" />
             <img src="images/beirut3.jpg" />
             <img src="images/beirut4.jpg" />
-            <img src="images/beirut5.jpg" />
-            <img src="images/beirut6.jpg" />
-            <img src="images/beirut7.jpg" />
           </div>
         </div>
         <div class="portfolio-item" onclick="toggleGallery('urban')">
@@ -478,8 +478,10 @@
     </div>
   </footer>
 
-  <!-- WhatsApp Floating Button -->
-  <a href="https://wa.me/254712345678" class="whatsapp-button" target="_blank">💬</a>
+  <!-- WhatsApp Floating Button with Real Icon -->
+  <a href="https://wa.me/254712345678" class="whatsapp-button" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
 
   <!-- Lightbox Modal -->
   <div id="lightbox" class="lightbox" onclick="closeLightbox()">
@@ -490,8 +492,8 @@
   </div>
 
   <!-- Service Modal -->
-  <div class="modal" id="modal">
-    <div class="modal-content" id="modal-content">
+  <div class="modal" id="modal" onclick="closeModal()">
+    <div class="modal-content" id="modal-content" onclick="event.stopPropagation()">
       <h3 id="modal-title"></h3>
       <p id="modal-description"></p>
       <ul id="modal-list"></ul>
