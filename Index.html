@@ -530,8 +530,12 @@
     }
 
     function closeLightbox() {
-      document.getElementById('lightbox').style.display = 'none';
-    }
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImages = document.getElementById('lightbox-images');
+  lightbox.style.display = 'none';
+  // Reset the scroll position to the top
+  lightboxImages.scrollTop = 0;
+}
 
     // Smooth scroll for CTA button in hero
     document.querySelectorAll('.cta-button').forEach(btn => {
