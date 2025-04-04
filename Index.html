@@ -513,6 +513,7 @@
       if (loader) loader.style.display = 'none';
     }
 
+    // Reset scroll on gallery open
     function toggleGallery(id) {
       const gallery = document.getElementById(id);
       const images = gallery.querySelectorAll('img');
@@ -527,20 +528,23 @@
       });
 
       lightbox.style.display = 'flex';
+      // Use a short delay to allow rendering, then reset scroll
+      setTimeout(() => {
+        const lightboxContent = document.querySelector('.lightbox-content');
+        if (lightboxContent) {
+          lightboxContent.scrollTop = 0;
+        }
+      }, 50);
     }
 
-    // Updated closeLightbox: resets scroll for both lightbox-content and lightbox-images
+    // Reset scroll on lightbox close
     function closeLightbox() {
       const lightbox = document.getElementById('lightbox');
-      lightbox.style.display = 'none';
       const lightboxContent = document.querySelector('.lightbox-content');
-      const lightboxImages = document.getElementById('lightbox-images');
       if (lightboxContent) {
         lightboxContent.scrollTop = 0;
       }
-      if (lightboxImages) {
-        lightboxImages.scrollTop = 0;
-      }
+      lightbox.style.display = 'none';
     }
 
     // Smooth scroll for CTA button in hero
