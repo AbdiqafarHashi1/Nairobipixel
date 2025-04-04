@@ -291,7 +291,7 @@
       background: #1EBE57;
     }
 
-    /* Lightbox & Modal Styles */
+    /* Lightbox & Service Modal Styles */
     .lightbox, .modal {
       display: none;
       position: fixed;
@@ -358,6 +358,10 @@
     .modal-content button:hover {
       background-color: #444;
     }
+
+    /* Pricing Modal Styles */
+    /* We'll reuse .modal and .modal-content classes for the pricing modal */
+    /* Add custom styles if needed in the pricing modal markup below */
 
     /* Responsive Adjustments */
     @media (max-width: 480px) {
@@ -489,7 +493,7 @@
   <!-- Pricing Section -->
   <section id="pricing" class="fade-out">
     <div class="container">
-      <h2 class="gold" style="text-align: center; font-size: 2rem; margin-bottom: 40px;">Pricing</h2>
+      <h2 class="gold" style="text-align: center; margin-bottom: 40px;">Pricing</h2>
       <div class="pricing-grid">
         <!-- Basic Package -->
         <div class="pricing-card">
@@ -502,7 +506,7 @@
             <li>Social Media Integration</li>
             <li>Standard Branding</li>
           </ul>
-          <button>Select Basic</button>
+          <button onclick="openPricingModal('Basic Package')">Select Basic</button>
         </div>
         <!-- Standard Package -->
         <div class="pricing-card">
@@ -516,7 +520,7 @@
             <li>Custom Branding & Identity</li>
             <li>Analytics Integration</li>
           </ul>
-          <button>Select Standard</button>
+          <button onclick="openPricingModal('Standard Package')">Select Standard</button>
         </div>
         <!-- Premium Package -->
         <div class="pricing-card">
@@ -531,35 +535,59 @@
             <li>E-commerce Integration</li>
             <li>Priority Support & Maintenance</li>
           </ul>
-          <button>Select Premium</button>
+          <button onclick="openPricingModal('Premium Package')">Select Premium</button>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Pricing Modal (for package selection) -->
+  <div class="modal" id="pricingModal" onclick="closePricingModal()">
+    <div class="modal-content" id="pricingModalContent" onclick="event.stopPropagation()">
+      <h3 id="pricingModalTitle"></h3>
+      <form id="pricingForm" action="submit_form.php" method="post">
+        <input type="hidden" name="package" id="selectedPackage" value="">
+        <div style="margin-bottom: 15px;">
+          <label for="name" style="display: block; margin-bottom: 5px;">Name:</label>
+          <input type="text" name="name" id="name" style="width: 100%; padding: 8px;" required>
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label for="email" style="display: block; margin-bottom: 5px;">Email:</label>
+          <input type="email" name="email" id="email" style="width: 100%; padding: 8px;" required>
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label for="message" style="display: block; margin-bottom: 5px;">Message:</label>
+          <textarea name="message" id="message" rows="4" style="width: 100%; padding: 8px;"></textarea>
+        </div>
+        <button type="submit" style="background-color: #D4AF37; border: none; padding: 10px 20px; color: #111; font-weight: bold; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease, transform 0.3s ease;">Submit</button>
+        <button type="button" onclick="closePricingModal()" style="background-color: #333; border: none; padding: 10px 20px; color: #fff; font-weight: bold; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease; margin-left: 10px;">Cancel</button>
+      </form>
+    </div>
+  </div>
+
   <!-- About Section -->
-  <section id="about" class="fade-out" style="background-color: #0B0B0B; color: #fff; padding: 80px 20px;">
+  <section id="about" class="fade-out" style="background-color: #0B0B0B; padding: 80px 20px;">
     <div class="container">
-      <h2 class="gold" style="text-align: center; font-size: 2rem; margin-bottom: 10px;">
+      <h2 class="gold" style="text-align: center; margin-bottom: 10px;">
         Why <span style="color: #D4AF37;">NairobiPixel</span>?
       </h2>
-      <p style="text-align: center; color: #aaa; max-width: 650px; margin: 0 auto 50px; font-size: 1rem;">
+      <p style="text-align: center; color: #aaa; max-width: 650px; margin: 0 auto 50px;">
         We help Nairobi’s brands stand out with a powerful online presence—built on bold design, smart content, and strategic execution.
       </p>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
-        <div style="background:#111; padding: 30px; border-left: 4px solid transparent; border-radius: 8px; transition: border-color 0.3s ease;">
+        <div style="background:#111; padding: 30px; border-left: 4px solid transparent; border-radius: 8px; transition: border-color 0.3s;">
           <p style="font-style: italic; color: #ccc;">
             “Working with NairobiPixel completely transformed how customers discover our food. Our Instagram is now a magnet.”
           </p>
           <p style="color: #D4AF37; font-weight: 600; margin-top: 10px;">— Beirut Restaurant</p>
         </div>
-        <div style="background:#111; padding: 30px; border-left: 4px solid transparent; border-radius: 8px; transition: border-color 0.3s ease;">
+        <div style="background:#111; padding: 30px; border-left: 4px solid transparent; border-radius: 8px; transition: border-color 0.3s;">
           <p style="font-style: italic; color: #ccc;">
             “From no website to a portfolio that closed 4 jobs in the first month. NairobiPixel is serious branding.”
           </p>
           <p style="color: #D4AF37; font-weight: 600; margin-top: 10px;">— Kenyos Interiors</p>
         </div>
-        <div style="background:#111; padding: 30px; border-left: 4px solid transparent; border-radius: 8px; transition: border-color 0.3s ease;">
+        <div style="background:#111; padding: 30px; border-left: 4px solid transparent; border-radius: 8px; transition: border-color 0.3s;">
           <p style="font-style: italic; color: #ccc;">
             “The new branding made us look premium. Our online presence finally matches the taste of our food.”
           </p>
@@ -575,16 +603,16 @@
   </style>
 
   <!-- Footer -->
-  <footer id="contact" class="fade-out" style="background:#0B0B0B; padding:60px 20px 40px;">
+  <footer id="contact" class="fade-out" style="background:#0B0B0B; padding: 60px 20px 40px;">
     <div class="container" style="text-align:center; max-width: 600px; margin: auto;">
-      <h2 class="gold" style="margin-bottom: 20px; font-size: 1.8rem; color: #D4AF37;">Let’s Talk</h2>
-      <p style="margin: 10px 0; font-size: 1rem; color: #fff;">
+      <h2 class="gold" style="margin-bottom: 20px; font-size: 1.8rem;">Let’s Talk</h2>
+      <p style="margin: 10px 0; font-size: 1rem;">
         Email: <a href="mailto:info@nairobipixel.com" style="color:#D4AF37; text-decoration: none;">info@nairobipixel.com</a>
       </p>
-      <p style="margin: 10px 0; font-size: 1rem; color: #fff;">
+      <p style="margin: 10px 0; font-size: 1rem;">
         Instagram: <a href="" target="_blank" style="color:#D4AF37; text-decoration: none;">@nairobipixel</a>
       </p>
-      <p style="margin: 10px 0; font-size: 1rem; color: #fff;">
+      <p style="margin: 10px 0; font-size: 1rem;">
         Phone/WhatsApp: <a href="https://wa.me/254700370377" target="_blank" style="color:#D4AF37; text-decoration: none;">+254 700 370377</a>
       </p>
       <div style="margin: 30px 0;">
@@ -622,18 +650,40 @@
     </div>
   </div>
 
+  <!-- Pricing Modal -->
+  <div class="modal" id="pricingModal" onclick="closePricingModal()">
+    <div class="modal-content" id="pricingModalContent" onclick="event.stopPropagation()">
+      <h3 id="pricingModalTitle"></h3>
+      <form id="pricingForm" action="submit_form.php" method="post">
+        <input type="hidden" name="package" id="selectedPackage" value="">
+        <div style="margin-bottom: 15px;">
+          <label for="name" style="display: block; margin-bottom: 5px;">Name:</label>
+          <input type="text" name="name" id="name" style="width: 100%; padding: 8px;" required>
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label for="email" style="display: block; margin-bottom: 5px;">Email:</label>
+          <input type="email" name="email" id="email" style="width: 100%; padding: 8px;" required>
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label for="message" style="display: block; margin-bottom: 5px;">Message:</label>
+          <textarea name="message" id="message" rows="4" style="width: 100%; padding: 8px;"></textarea>
+        </div>
+        <button type="submit" style="background-color: #D4AF37; border: none; padding: 10px 20px; color: #111; font-weight: bold; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease, transform 0.3s ease;">Submit</button>
+        <button type="button" onclick="closePricingModal()" style="background-color: #333; border: none; padding: 10px 20px; color: #fff; font-weight: bold; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease; margin-left: 10px;">Cancel</button>
+      </form>
+    </div>
+  </div>
+
   <script>
     function toggleMenu() {
       const nav = document.getElementById('navbar');
       nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
       nav.style.flexDirection = 'column';
     }
-
     function hideLoader() {
       const loader = document.getElementById('loader');
       if (loader) loader.style.display = 'none';
     }
-
     // Reset scroll on gallery open
     function toggleGallery(id) {
       const gallery = document.getElementById(id);
@@ -646,7 +696,6 @@
         lightboxImages.appendChild(clone);
       });
       lightbox.style.display = 'flex';
-      // Delay then reset scroll
       setTimeout(() => {
         const lightboxContent = document.querySelector('.lightbox-content');
         if (lightboxContent) {
@@ -654,24 +703,19 @@
         }
       }, 50);
     }
-
     // Reset scroll on lightbox close
     function closeLightbox() {
       const lightbox = document.getElementById('lightbox');
       const lightboxContent = document.querySelector('.lightbox-content');
-      if (lightboxContent) {
-        lightboxContent.scrollTop = 0;
-      }
+      if (lightboxContent) { lightboxContent.scrollTop = 0; }
       lightbox.style.display = 'none';
     }
-
     // Smooth scroll for CTA button in hero
     document.querySelectorAll('.cta-button').forEach(btn => {
       btn.addEventListener('click', () => {
         document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
       });
     });
-
     // Fade-in animation for sections and footer
     const faders = document.querySelectorAll('section, footer');
     const appearOnScroll = new IntersectionObserver((entries, observer) => {
@@ -685,7 +729,6 @@
       fader.classList.add('fade-out');
       appearOnScroll.observe(fader);
     });
-
     // Modal for Services
     function openModal(service) {
       const modal = document.getElementById('modal');
@@ -738,9 +781,15 @@
       }
       modal.style.display = 'flex';
     }
-
-    function closeModal() {
-      document.getElementById('modal').style.display = 'none';
+    function closeModal() { document.getElementById('modal').style.display = 'none'; }
+    // Open Pricing Modal (for package selection)
+    function openPricingModal(packageName) {
+      document.getElementById('pricingModalTitle').textContent = "Select " + packageName;
+      document.getElementById('selectedPackage').value = packageName;
+      document.getElementById('pricingModal').style.display = 'flex';
+    }
+    function closePricingModal() {
+      document.getElementById('pricingModal').style.display = 'none';
     }
   </script>
 </body>
