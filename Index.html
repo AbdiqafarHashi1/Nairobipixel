@@ -449,7 +449,7 @@
   </style>
 
   <!-- Footer -->
-  <footer id="contact" class="fade-out" style="background:#0A0B0B; padding:60px 20px 40px;">
+  <footer id="contact" class="fade-out" style="background:#0B0B0B; padding:60px 20px 40px;">
     <div class="container" style="text-align:center; max-width: 600px; margin: auto;">
       <h2 class="gold" style="margin-bottom: 20px; font-size: 1.8rem; color: #D4AF37;">Let’s Talk</h2>
       <p style="margin: 10px 0; font-size: 1rem; color: #fff;">
@@ -529,13 +529,17 @@
       lightbox.style.display = 'flex';
     }
 
-    // Updated closeLightbox function resets scroll position using scrollTo
+    // Updated closeLightbox: resets scroll for both lightbox-content and lightbox-images
     function closeLightbox() {
       const lightbox = document.getElementById('lightbox');
       lightbox.style.display = 'none';
       const lightboxContent = document.querySelector('.lightbox-content');
+      const lightboxImages = document.getElementById('lightbox-images');
       if (lightboxContent) {
-        lightboxContent.scrollTo(0, 0);
+        lightboxContent.scrollTop = 0;
+      }
+      if (lightboxImages) {
+        lightboxImages.scrollTop = 0;
       }
     }
 
