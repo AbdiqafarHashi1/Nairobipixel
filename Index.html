@@ -529,12 +529,14 @@
       lightbox.style.display = 'flex';
     }
 
-    // Updated closeLightbox: resets scroll position of the lightbox-content container
+    // Updated closeLightbox function resets scroll position using scrollTo
     function closeLightbox() {
       const lightbox = document.getElementById('lightbox');
-      const lightboxContent = document.querySelector('.lightbox-content');
       lightbox.style.display = 'none';
-      lightboxContent.scrollTop = 0;
+      const lightboxContent = document.querySelector('.lightbox-content');
+      if (lightboxContent) {
+        lightboxContent.scrollTo(0, 0);
+      }
     }
 
     // Smooth scroll for CTA button in hero
