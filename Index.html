@@ -67,20 +67,18 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      height: 50px; /* Fixed header height */
     }
-    /* Logo container with both SVG logos */
+    /* Logo */
     .logo {
-      position: relative;
-      height: 50px; /* Adjust as needed */
+      display: flex;
+      align-items: center;
+      height: 50px;
     }
     .logo img {
       width: 150px; /* Adjust as needed */
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
       transition: opacity 0.5s ease;
     }
-    /* Show the light logo by default */
     .logo-light { opacity: 1; }
     .logo-dark { opacity: 0; }
     
@@ -92,8 +90,8 @@
     }
     nav a:hover { color: #D4AF37; }
     .mobile-toggle { display: none; }
-
-    /* Hero */
+    
+    /* Hero Section */
     .hero {
       background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
                   url('images/hero-bg.jpg') center center/cover no-repeat;
@@ -146,7 +144,7 @@
       background-color: #c8a634;
       transform: scale(1.05);
     }
-
+    
     /* Portfolio & Services */
     .portfolio-grid, .services-grid {
       display: grid;
@@ -203,7 +201,7 @@
       cursor: pointer;
       transition: background-color 0.5s ease;
     }
-
+    
     /* Pricing Section */
     #pricing {
       background-color: #0B0B0B;
@@ -275,7 +273,7 @@
       background-color: #c8a634;
       transform: scale(1.05);
     }
-
+    
     /* About Section */
     #about {
       background-color: #0B0B0B;
@@ -283,7 +281,7 @@
       padding: 80px 20px;
       transition: background-color 0.5s ease, color 0.5s ease;
     }
-
+    
     /* Footer */
     footer {
       background: #0B0B0B;
@@ -326,7 +324,7 @@
       background-color: #c8a634;
       transform: scale(1.05);
     }
-
+    
     /* WhatsApp Button */
     .whatsapp-button {
       position: fixed;
@@ -348,7 +346,7 @@
     .whatsapp-button:hover {
       background: #1EBE57;
     }
-
+    
     /* Lightbox & Modal Styles */
     .lightbox, .modal {
       display: none;
@@ -421,24 +419,26 @@
     .modal-content button:hover {
       background-color: #444;
     }
-
+    
     /* Responsive Adjustments */
     @media (max-width: 480px) {
       h2 { font-size: 1.5rem; }
       .pricing-card p.price { font-size: 1.4rem; }
     }
-
+    
     /* Mobile Menu & Header Adjustments */
     @media screen and (max-width: 768px) {
-      nav {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        background: #000;
-        right: 20px;
-        top: 60px;
-        padding: 10px;
-        border-radius: 4px;
+      .header-content {
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        height: 50px;
+      }
+      .logo {
+        height: 50px;
+      }
+      .logo img {
+        width: 120px;
       }
       .mobile-toggle {
         display: block;
@@ -446,27 +446,23 @@
         color: #D4AF37;
         font-size: 1.5rem;
         border: none;
+        width: 40px;
+        text-align: center;
       }
-      /* Prevent header elements from wrapping */
-      .header-content {
-        flex-wrap: nowrap;
-      }
-      /* Ensure logo stays aligned */
-      .logo {
-        display: flex;
-        align-items: center;
-        height: auto;
-      }
-      .logo img {
-        position: static;
-        transform: none;
-        width: 120px;
-        margin: 0;
+      nav {
+        font-size: 0.9rem;
+        padding: 8px;
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        background: #000;
+        right: 20px;
+        top: 50px;
+        border-radius: 4px;
       }
     }
-
-    /* ===== Theme Toggle Overrides ===== */
-    /* When the paige theme is active, override dark defaults */
+    
+    /* Theme Toggle Overrides */
     body.paige-theme {
       background-color: #f5efe1;
       color: #222;
@@ -497,14 +493,8 @@
       background: #fff5e0;
       color: #222;
     }
-    /* Swap logos when paige theme is active */
-    body.paige-theme .logo-light {
-      opacity: 0;
-    }
-    body.paige-theme .logo-dark {
-      opacity: 1;
-    }
-    /* Theme Toggle Button */
+    body.paige-theme .logo-light { opacity: 0; }
+    body.paige-theme .logo-dark { opacity: 1; }
     #themeToggle {
       border: none;
       background: none;
@@ -513,52 +503,7 @@
       transition: transform 0.5s ease;
       margin-left: 20px;
     }
-    #themeToggle:hover {
-      transform: scale(1.1);
-    }
-    @media screen and (max-width: 768px) {
-  .header-content {
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: space-between;
-    height: 50px; /* Fixed header height */
-  }
-  .logo {
-    display: flex;
-    align-items: center;
-    height: 50px; /* Fixed logo container height */
-  }
-  .logo img {
-    display: block;
-    max-height: 100%; /* Fill container height */
-    width: auto;
-    position: static;
-    transform: none;
-    margin: 0;
-  }
-  .mobile-toggle {
-    display: block;
-    background: none;
-    color: #D4AF37;
-    font-size: 1.5rem;
-    border: none;
-    width: 40px;      /* Fixed width */
-    text-align: center;
-  }
-  nav {
-    font-size: 0.9rem; /* Smaller font size for nav items */
-    padding: 8px;      /* Reduced padding */
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    background: #000;
-    right: 20px;
-    top: 50px;         /* Positioned below the header */
-    border-radius: 4px;
-  }
-}
-
-
+    #themeToggle:hover { transform: scale(1.1); }
   </style>
 </head>
 <body onload="hideLoader()">
@@ -567,9 +512,9 @@
     <div class="container header-content">
       <div class="logo">
         <!-- Light theme logo -->
-        <img src="images/logo-light.svg" class="logo-light" alt="NairobiPixel Light Logo" />
+        <img src="images/logo-light.svg" class="logo-light" alt="NairobiPixel Light Logo">
         <!-- Dark theme logo -->
-        <img src="images/logo-dark.svg" class="logo-dark" alt="NairobiPixel Dark Logo" />
+        <img src="images/logo-dark.svg" class="logo-dark" alt="NairobiPixel Dark Logo">
       </div>
       <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
       <nav id="navbar">
@@ -579,11 +524,10 @@
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
-      <!-- Theme Toggle Button -->
       <button id="themeToggle" aria-label="Toggle Theme">🌓</button>
     </div>
   </header>
-
+  
   <!-- Hero Section -->
   <section class="hero fade-out">
     <div class="container">
@@ -592,7 +536,7 @@
       <button class="cta-button">Get Started</button>
     </div>
   </section>
-
+  
   <!-- Work Section -->
   <section id="work" class="fade-out">
     <div class="container">
@@ -600,56 +544,56 @@
       <div class="portfolio-grid">
         <div class="portfolio-item" onclick="toggleGallery('kenyos')">
           KENYOS INTERIORS
-          <img src="images/kenyos.jpg" alt="Kenyos" loading="lazy" />
+          <img src="images/kenyos.jpg" alt="Kenyos" loading="lazy">
           <div class="gallery" id="kenyos">
-            <img src="images/kenyos1.jpg" alt="Kenyos 1" loading="lazy" />
-            <img src="images/kenyos2.jpg" alt="Kenyos 2" loading="lazy" />
-            <img src="images/kenyos3.jpg" alt="Kenyos 3" loading="lazy" />
-            <img src="images/kenyos4.jpg" alt="Kenyos 4" loading="lazy" />
-            <img src="images/kenyos5.jpg" alt="Kenyos 5" loading="lazy" />
-            <img src="images/kenyos6.jpg" alt="Kenyos 6" loading="lazy" />
-            <img src="images/kenyos7.jpg" alt="Kenyos 7" loading="lazy" />
-            <img src="images/kenyos8.jpg" alt="Kenyos 8" loading="lazy" />
+            <img src="images/kenyos1.jpg" alt="Kenyos 1" loading="lazy">
+            <img src="images/kenyos2.jpg" alt="Kenyos 2" loading="lazy">
+            <img src="images/kenyos3.jpg" alt="Kenyos 3" loading="lazy">
+            <img src="images/kenyos4.jpg" alt="Kenyos 4" loading="lazy">
+            <img src="images/kenyos5.jpg" alt="Kenyos 5" loading="lazy">
+            <img src="images/kenyos6.jpg" alt="Kenyos 6" loading="lazy">
+            <img src="images/kenyos7.jpg" alt="Kenyos 7" loading="lazy">
+            <img src="images/kenyos8.jpg" alt="Kenyos 8" loading="lazy">
           </div>
         </div>
         <div class="portfolio-item" onclick="toggleGallery('beirut')">
           BEIRUT
-          <img src="images/beirut.jpg" alt="Beirut" loading="lazy" />
+          <img src="images/beirut.jpg" alt="Beirut" loading="lazy">
           <div class="gallery" id="beirut">
-            <img src="images/beirut1.jpg" alt="Beirut 1" loading="lazy" />
-            <img src="images/beirut2.jpg" alt="Beirut 2" loading="lazy" />
-            <img src="images/beirut3.jpg" alt="Beirut 3" loading="lazy" />
-            <img src="images/beirut4.jpg" alt="Beirut 4" loading="lazy" />
+            <img src="images/beirut1.jpg" alt="Beirut 1" loading="lazy">
+            <img src="images/beirut2.jpg" alt="Beirut 2" loading="lazy">
+            <img src="images/beirut3.jpg" alt="Beirut 3" loading="lazy">
+            <img src="images/beirut4.jpg" alt="Beirut 4" loading="lazy">
           </div>
         </div>
         <div class="portfolio-item" onclick="toggleGallery('urban')">
           URBAN FLAME
-          <img src="images/urbanflame.jpg" alt="Urban Flame" loading="lazy" />
+          <img src="images/urbanflame.jpg" alt="Urban Flame" loading="lazy">
           <div class="gallery" id="urban">
-            <img src="images/urban1.jpg" alt="Urban 1" loading="lazy" />
-            <img src="images/urban2.jpg" alt="Urban 2" loading="lazy" />
-            <img src="images/urban3.jpg" alt="Urban 3" loading="lazy" />
-            <img src="images/urban4.jpg" alt="Urban 4" loading="lazy" />
-            <img src="images/urban5.jpg" alt="Urban 5" loading="lazy" />
-            <img src="images/urban6.jpg" alt="Urban 6" loading="lazy" />
+            <img src="images/urban1.jpg" alt="Urban 1" loading="lazy">
+            <img src="images/urban2.jpg" alt="Urban 2" loading="lazy">
+            <img src="images/urban3.jpg" alt="Urban 3" loading="lazy">
+            <img src="images/urban4.jpg" alt="Urban 4" loading="lazy">
+            <img src="images/urban5.jpg" alt="Urban 5" loading="lazy">
+            <img src="images/urban6.jpg" alt="Urban 6" loading="lazy">
           </div>
         </div>
         <div class="portfolio-item" onclick="toggleGallery('laas')">
           LAAS COFFEE
-          <img src="images/laas.jpg" alt="Laas Coffee" loading="lazy" />
+          <img src="images/laas.jpg" alt="Laas Coffee" loading="lazy">
           <div class="gallery" id="laas">
-            <img src="images/laas1.jpg" alt="laas 1" loading="lazy" />
-            <img src="images/laas2.jpg" alt="laas 2" loading="lazy" />
-            <img src="images/laas3.jpg" alt="laas 3" loading="lazy" />
-            <img src="images/laas4.jpg" alt="laas 4" loading="lazy" />
-            <img src="images/laas5.jpg" alt="laas 5" loading="lazy" />
-            <img src="images/laas6.jpg" alt="laas 6" loading="lazy" />
+            <img src="images/laas1.jpg" alt="laas 1" loading="lazy">
+            <img src="images/laas2.jpg" alt="laas 2" loading="lazy">
+            <img src="images/laas3.jpg" alt="laas 3" loading="lazy">
+            <img src="images/laas4.jpg" alt="laas 4" loading="lazy">
+            <img src="images/laas5.jpg" alt="laas 5" loading="lazy">
+            <img src="images/laas6.jpg" alt="laas 6" loading="lazy">
           </div>
         </div>
       </div>
     </div>
   </section>
-
+  
   <!-- Services Section -->
   <section id="services" class="fade-out">
     <div class="container">
@@ -678,7 +622,7 @@
       </div>
     </div>
   </section>
-
+  
   <!-- Pricing Section -->
   <section id="pricing" class="fade-out">
     <div class="container">
@@ -691,7 +635,6 @@
         </select>
       </div>
       <div class="pricing-grid">
-        <!-- Basic Package -->
         <div class="pricing-card">
           <h3>Basic Package</h3>
           <p class="price" data-usd="149">$149</p>
@@ -704,7 +647,6 @@
           </ul>
           <button onclick="openPricingModal('Basic Package')">Select Basic</button>
         </div>
-        <!-- Standard Package -->
         <div class="pricing-card">
           <h3>Standard Package</h3>
           <p class="price" data-usd="249">$249</p>
@@ -718,7 +660,6 @@
           </ul>
           <button onclick="openPricingModal('Standard Package')">Select Standard</button>
         </div>
-        <!-- Premium Package -->
         <div class="pricing-card">
           <h3>Premium Package</h3>
           <p class="price" data-usd="399">$399</p>
@@ -736,7 +677,7 @@
       </div>
     </div>
   </section>
-
+  
   <!-- About Section -->
   <section id="about" class="fade-out">
     <div class="container">
@@ -768,13 +709,7 @@
       </div>
     </div>
   </section>
-  <style>
-    /* Hover effect for about section testimonials */
-    #about .container > div:hover {
-      border-left-color: #D4AF37 !important;
-    }
-  </style>
-
+  
   <!-- Footer -->
   <footer id="contact" class="fade-out">
     <div class="container">
@@ -799,12 +734,12 @@
       &copy; 2025 <span style="color:#D4AF37">NairobiPixel</span>. All rights reserved.
     </div>
   </footer>
-
+  
   <!-- WhatsApp Floating Button -->
   <a href="https://wa.me/254700370377" class="whatsapp-button" target="_blank">
     <i class="fab fa-whatsapp"></i>
   </a>
-
+  
   <!-- Lightbox Modal -->
   <div id="lightbox" class="lightbox" onclick="closeLightbox()">
     <div class="lightbox-content" onclick="event.stopPropagation()">
@@ -812,7 +747,7 @@
       <div id="lightbox-images" class="lightbox-images"></div>
     </div>
   </div>
-
+  
   <!-- Service Modal -->
   <div class="modal" id="modal" onclick="closeModal()">
     <div class="modal-content" id="modal-content" onclick="event.stopPropagation()">
@@ -822,7 +757,7 @@
       <button onclick="closeModal()">Close</button>
     </div>
   </div>
-
+  
   <!-- Pricing Modal -->
   <div class="modal" id="pricingModal" onclick="closePricingModal()">
     <div class="modal-content" id="pricingModalContent" onclick="event.stopPropagation()">
@@ -846,15 +781,15 @@
       </form>
     </div>
   </div>
-
+  
   <!-- Contact Modal -->
   <div class="modal" id="contactModal" onclick="closeContactModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
       <h3 style="color: #D4AF37;">Contact NairobiPixel</h3>
       <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="contact" />
+        <input type="hidden" name="form-name" value="contact">
         <p hidden>
-          <label>Don’t fill this out: <input name="bot-field" /></label>
+          <label>Don’t fill this out: <input name="bot-field"></label>
         </p>
         <div style="margin-bottom: 15px;">
           <label for="contactName">Name:</label>
@@ -873,7 +808,7 @@
       </form>
     </div>
   </div>
-
+  
   <script>
     function toggleMenu() {
       const nav = document.getElementById('navbar');
@@ -884,7 +819,6 @@
       const loader = document.getElementById('loader');
       if (loader) loader.style.display = 'none';
     }
-    // Reset scroll on gallery open
     function toggleGallery(id) {
       const gallery = document.getElementById(id);
       const images = gallery.querySelectorAll('img');
@@ -901,20 +835,17 @@
         if (lightboxContent) { lightboxContent.scrollTop = 0; }
       }, 50);
     }
-    // Reset scroll on lightbox close
     function closeLightbox() {
       const lightbox = document.getElementById('lightbox');
       const lightboxContent = document.querySelector('.lightbox-content');
       if (lightboxContent) { lightboxContent.scrollTop = 0; }
       lightbox.style.display = 'none';
     }
-    // Smooth scroll for CTA button in hero
     document.querySelectorAll('.cta-button').forEach(btn => {
       btn.addEventListener('click', () => {
         document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
       });
     });
-    // Fade-in animation for sections and footer
     const faders = document.querySelectorAll('section, footer');
     const appearOnScroll = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
@@ -927,7 +858,6 @@
       fader.classList.add('fade-out');
       appearOnScroll.observe(fader);
     });
-    // Modal for Services
     function openModal(service) {
       const modal = document.getElementById('modal');
       const title = document.getElementById('modal-title');
@@ -980,7 +910,6 @@
       modal.style.display = 'flex';
     }
     function closeModal() { document.getElementById('modal').style.display = 'none'; }
-    // Open Pricing Modal (for package selection)
     function openPricingModal(packageName) {
       document.getElementById('pricingModalTitle').textContent = "Select " + packageName;
       document.getElementById('selectedPackage').value = packageName;
@@ -1001,7 +930,7 @@
         exchangeRateKES = data.rates.KES;
       } catch (err) {
         console.error("Exchange rate fetch failed:", err);
-        exchangeRateKES = 130; // fallback
+        exchangeRateKES = 130;
       }
     }
     function toggleCurrency() {
@@ -1018,12 +947,8 @@
       });
     }
     fetchExchangeRate().then(() => { toggleCurrency(); });
-  </script>
-
-  <!-- ===== Theme Toggle Script ===== -->
-  <script>
+  
     const themeToggle = document.getElementById('themeToggle');
-    // Check localStorage for saved theme and apply if it's paige-theme
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'paige-theme') {
       document.body.classList.add('paige-theme');
