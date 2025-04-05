@@ -521,27 +521,20 @@
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-    height: 50px; /* Fixed height for header */
+    height: 50px; /* Fixed header height */
   }
   .logo {
-    height: 50px; /* Same fixed height */
+    display: flex;
+    align-items: center;
+    height: 50px; /* Fixed logo container height */
   }
   .logo img {
-    height: 100%;   /* Fill the container’s height */
-    width: auto;    /* Maintain aspect ratio */
+    display: block;
+    max-height: 100%; /* Fill container height */
+    width: auto;
     position: static;
     transform: none;
     margin: 0;
-  }
-  nav {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    background: #000;
-    right: 20px;
-    top: 60px;
-    padding: 10px;
-    border-radius: 4px;
   }
   .mobile-toggle {
     display: block;
@@ -549,8 +542,22 @@
     color: #D4AF37;
     font-size: 1.5rem;
     border: none;
+    width: 40px;      /* Fixed width */
+    text-align: center;
+  }
+  nav {
+    font-size: 0.9rem; /* Smaller font size for nav items */
+    padding: 8px;      /* Reduced padding */
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    background: #000;
+    right: 20px;
+    top: 50px;         /* Positioned below the header */
+    border-radius: 4px;
   }
 }
+
 
   </style>
 </head>
