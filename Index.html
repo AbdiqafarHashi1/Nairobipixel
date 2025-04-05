@@ -516,6 +516,42 @@
     #themeToggle:hover {
       transform: scale(1.1);
     }
+    @media screen and (max-width: 768px) {
+  .header-content {
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px; /* Fixed height for header */
+  }
+  .logo {
+    height: 50px; /* Same fixed height */
+  }
+  .logo img {
+    height: 100%;   /* Fill the container’s height */
+    width: auto;    /* Maintain aspect ratio */
+    position: static;
+    transform: none;
+    margin: 0;
+  }
+  nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    background: #000;
+    right: 20px;
+    top: 60px;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  .mobile-toggle {
+    display: block;
+    background: none;
+    color: #D4AF37;
+    font-size: 1.5rem;
+    border: none;
+  }
+}
+
   </style>
 </head>
 <body onload="hideLoader()">
