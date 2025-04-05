@@ -53,6 +53,8 @@
       transition: color 0.5s ease;
     }
     .gold { color: #D4AF37; }
+    
+    /* Header */
     header {
       background: #000;
       padding: 20px 0;
@@ -66,12 +68,20 @@
       justify-content: space-between;
       align-items: center;
     }
-    .logo { 
-      color: #D4AF37; 
-      font-size: 1.5rem; 
-      font-weight: bold; 
-      transition: color 0.5s ease; 
+    /* Logo container with both SVG logos */
+    .logo {
+      position: relative;
+      height: 50px; /* Adjust as needed */
     }
+    .logo img {
+      width: 150px; /* Adjust as needed */
+      position: absolute;
+      transition: opacity 0.5s ease;
+    }
+    /* Show the light logo by default */
+    .logo-light { opacity: 1; }
+    .logo-dark { opacity: 0; }
+    
     nav { display: flex; gap: 24px; }
     nav a {
       color: #fff;
@@ -410,8 +420,6 @@
       background-color: #444;
     }
 
-    /* Pricing Modal Styles (for Package Selection) */
-    
     /* Responsive Adjustments */
     @media (max-width: 480px) {
       h2 { font-size: 1.5rem; }
@@ -471,7 +479,14 @@
       background: #fff5e0;
       color: #222;
     }
-    /* Style for the Theme Toggle Button */
+    /* Swap logos when paige theme is active */
+    body.paige-theme .logo-light {
+      opacity: 0;
+    }
+    body.paige-theme .logo-dark {
+      opacity: 1;
+    }
+    /* Theme Toggle Button */
     #themeToggle {
       border: none;
       background: none;
@@ -489,7 +504,12 @@
   <!-- Header -->
   <header>
     <div class="container header-content">
-      <div class="logo">NairobiPixel</div>
+      <div class="logo">
+        <!-- Light theme logo -->
+        <img src="images/logo-light.svg" class="logo-light" alt="NairobiPixel Light Logo" />
+        <!-- Dark theme logo -->
+        <img src="images/logo-dark.svg" class="logo-dark" alt="NairobiPixel Dark Logo" />
+      </div>
       <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
       <nav id="navbar">
         <a href="#work">Our Work</a>
@@ -552,6 +572,27 @@
             <img src="images/urban5.jpg" alt="Urban 5" loading="lazy" />
             <img src="images/urban6.jpg" alt="Urban 6" loading="lazy" />
           </div>
+          <div class="portfolio-item" onclick="toggleGallery('urban')">
+            URBAN FLAME
+            <img src="images/urbanflame.jpg" alt="Urban Flame" loading="lazy" />
+            <div class="gallery" id="urban">
+              <img src="images/urban1.jpg" alt="Urban 1" loading="lazy" />
+              <img src="images/urban2.jpg" alt="Urban 2" loading="lazy" />
+              <img src="images/urban3.jpg" alt="Urban 3" loading="lazy" />
+              <img src="images/urban4.jpg" alt="Urban 4" loading="lazy" />
+              <img src="images/urban5.jpg" alt="Urban 5" loading="lazy" />
+              <img src="images/urban6.jpg" alt="Urban 6" loading="lazy" />
+            </div><div class="portfolio-item" onclick="toggleGallery('urban')">
+          Laas Coffee
+          <img src="images/laas.jpg" alt="Urban Flame" loading="lazy" />
+          <div class="gallery" id="urban">
+            <img src="images/laas1.jpg" alt="Urban 1" loading="lazy" />
+            <img src="images/laas2.jpg" alt="Urban 2" loading="lazy" />
+            <img src="images/laas3.jpg" alt="Urban 3" loading="lazy" />
+            <img src="images/laas4.jpg" alt="Urban 4" loading="lazy" />
+            <img src="images/laas5.jpg" alt="Urban 5" loading="lazy" />
+            <img src="images/laas6.jpg" alt="Urban 6" loading="lazy" />
+          </div>
         </div>
       </div>
     </div>
@@ -597,7 +638,6 @@
           <option value="KES">KES (Ksh)</option>
         </select>
       </div>
-      
       <div class="pricing-grid">
         <!-- Basic Package -->
         <div class="pricing-card">
@@ -788,12 +828,10 @@
       nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
       nav.style.flexDirection = 'column';
     }
-
     function hideLoader() {
       const loader = document.getElementById('loader');
       if (loader) loader.style.display = 'none';
     }
-
     // Reset scroll on gallery open
     function toggleGallery(id) {
       const gallery = document.getElementById(id);
@@ -811,7 +849,6 @@
         if (lightboxContent) { lightboxContent.scrollTop = 0; }
       }, 50);
     }
-
     // Reset scroll on lightbox close
     function closeLightbox() {
       const lightbox = document.getElementById('lightbox');
@@ -819,14 +856,12 @@
       if (lightboxContent) { lightboxContent.scrollTop = 0; }
       lightbox.style.display = 'none';
     }
-
     // Smooth scroll for CTA button in hero
     document.querySelectorAll('.cta-button').forEach(btn => {
       btn.addEventListener('click', () => {
         document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
       });
     });
-
     // Fade-in animation for sections and footer
     const faders = document.querySelectorAll('section, footer');
     const appearOnScroll = new IntersectionObserver((entries, observer) => {
@@ -840,7 +875,6 @@
       fader.classList.add('fade-out');
       appearOnScroll.observe(fader);
     });
-
     // Modal for Services
     function openModal(service) {
       const modal = document.getElementById('modal');
@@ -894,7 +928,6 @@
       modal.style.display = 'flex';
     }
     function closeModal() { document.getElementById('modal').style.display = 'none'; }
-
     // Open Pricing Modal (for package selection)
     function openPricingModal(packageName) {
       document.getElementById('pricingModalTitle').textContent = "Select " + packageName;
@@ -908,9 +941,7 @@
       document.getElementById('contactModal').style.display = 'none';
     }
     function closePricingModal() { document.getElementById('pricingModal').style.display = 'none'; }
-
     let exchangeRateKES = 0;
-
     async function fetchExchangeRate() {
       try {
         const res = await fetch("https://open.er-api.com/v6/latest/USD");
@@ -921,11 +952,9 @@
         exchangeRateKES = 130; // fallback
       }
     }
-
     function toggleCurrency() {
       const selectedCurrency = document.getElementById("currencyToggle").value;
       const priceTags = document.querySelectorAll(".price");
-
       priceTags.forEach(tag => {
         const usd = parseFloat(tag.dataset.usd);
         if (selectedCurrency === "USD") {
@@ -936,10 +965,7 @@
         }
       });
     }
-
-    fetchExchangeRate().then(() => {
-      toggleCurrency(); // Load KES values if selected by default
-    });
+    fetchExchangeRate().then(() => { toggleCurrency(); });
   </script>
 
   <!-- ===== Theme Toggle Script ===== -->
@@ -950,7 +976,6 @@
     if (savedTheme === 'paige-theme') {
       document.body.classList.add('paige-theme');
     }
-
     themeToggle.addEventListener('click', () => {
       if (document.body.classList.contains('paige-theme')) {
         document.body.classList.remove('paige-theme');
