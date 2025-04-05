@@ -500,6 +500,14 @@
     #themeToggle:hover {
       transform: scale(1.1);
     }
+    @media screen and (max-width: 768px) {
+  .logo img {
+    position: static;   /* Remove absolute positioning */
+    transform: none;    /* Reset transform */
+    width: 120px;       /* Adjust size if needed */
+  }
+}
+
   </style>
 </head>
 <body onload="hideLoader()">
