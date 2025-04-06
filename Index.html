@@ -793,56 +793,88 @@
     </div>
   </div>
   
-  <!-- Pricing Modal -->
-  <div class="modal" id="pricingModal" onclick="closePricingModal()">
-    <div class="modal-content" id="pricingModalContent" onclick="event.stopPropagation()">
-      <h3 id="pricingModalTitle"></h3>
-      <form id="pricingForm" action="submit_form.php" method="post">
-        <input type="hidden" name="package" id="selectedPackage" value="">
-        <div style="margin-bottom: 15px;">
-          <label for="name" style="display: block; margin-bottom: 5px;">Name:</label>
-          <input type="text" name="name" id="name" style="width: 100%; padding: 8px;" required>
-        </div>
-        <div style="margin-bottom: 15px;">
-          <label for="email" style="display: block; margin-bottom: 5px;">Email:</label>
-          <input type="email" name="email" id="email" style="width: 100%; padding: 8px;" required>
-        </div>
-        <div style="margin-bottom: 15px;">
-          <label for="message" style="display: block; margin-bottom: 5px;">Message:</label>
-          <textarea name="message" id="message" rows="4" style="width: 100%; padding: 8px;"></textarea>
-        </div>
+<!-- Pricing Modal -->
+<div class="modal" id="pricingModal" onclick="closePricingModal()">
+  <div class="modal-content" id="pricingModalContent" onclick="event.stopPropagation()">
+    <h3 id="pricingModalTitle"></h3>
+    <form id="pricingForm" name="pricing-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="pricing-contact">
+      <input type="hidden" name="package" id="selectedPackage" value="">
+      <p hidden>
+        <label>Don’t fill this out: <input name="bot-field"></label>
+      </p>
+      <div style="margin-bottom: 15px;">
+        <label for="name" style="display: block; margin-bottom: 5px;">Name:</label>
+        <input type="text" name="name" id="name" required style="width: 100%; padding: 8px; background: #222; border: 1px solid #444; color: #fff; border-radius: 4px;">
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label for="email" style="display: block; margin-bottom: 5px;">Email:</label>
+        <input type="email" name="email" id="email" required style="width: 100%; padding: 8px; background: #222; border: 1px solid #444; color: #fff; border-radius: 4px;">
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label for="interest">What service are you interested in?</label>
+        <select name="interest" id="interest" required style="width: 100%; padding: 8px; background: #222; border: 1px solid #444; color: #fff; border-radius: 4px;">
+          <option value="" disabled selected>Select a service</option>
+          <option value="Web Development">Web Development</option>
+          <option value="Branding">Branding</option>
+          <option value="Social Media Management">Social Media Management</option>
+          <option value="Paid Ads">Paid Ads</option>
+          <option value="All Services">All Services</option>
+        </select>
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label for="message" style="display: block; margin-bottom: 5px;">Message:</label>
+        <textarea name="message" id="message" rows="4" style="width: 100%; padding: 8px; background: #222; border: 1px solid #444; color: #fff; border-radius: 4px;"></textarea>
+      </div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
         <button type="submit" style="background-color: #D4AF37; border: none; padding: 10px 20px; color: #111; font-weight: bold; border-radius: 4px; cursor: pointer;">Submit</button>
-        <button type="button" onclick="closePricingModal()" style="background-color: #333; border: none; padding: 10px 20px; color: #fff; font-weight: bold; border-radius: 4px; cursor: pointer; margin-left: 10px;">Cancel</button>
-      </form>
-    </div>
+        <button type="button" onclick="closePricingModal()" style="background-color: #333; border: none; padding: 10px 20px; color: #fff; font-weight: bold; border-radius: 4px; cursor: pointer;">Cancel</button>
+        <a href="https://wa.me/254700370377" target="_blank" style="background-color: #25D366; padding: 10px 20px; color: #fff; font-weight: bold; border-radius: 4px; text-decoration: none; display: inline-block;">Chat on WhatsApp</a>
+      </div>
+    </form>
   </div>
+</div>
   
-  <!-- Contact Modal -->
-  <div class="modal" id="contactModal" onclick="closeContactModal()">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <h3 style="color: #D4AF37;">Contact NairobiPixel</h3>
-      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="contact">
-        <p hidden>
-          <label>Don’t fill this out: <input name="bot-field"></label>
-        </p>
-        <div style="margin-bottom: 15px;">
-          <label for="contactName">Name:</label>
-          <input type="text" id="contactName" name="name" required style="width: 100%; padding: 8px; background: #222; border: 1px solid #444; color: #fff; border-radius: 4px;">
-        </div>
-        <div style="margin-bottom: 15px;">
-          <label for="contactEmail">Email:</label>
-          <input type="email" id="contactEmail" name="email" required style="width: 100%; padding: 8px; background: #222; border: 1px solid #444; color: #fff; border-radius: 4px;">
-        </div>
-        <div style="margin-bottom: 15px;">
-          <label for="contactMessage">Message:</label>
-          <textarea id="contactMessage" name="message" rows="4" required style="width: 100%; padding: 8px; background: #222; border: 1px solid #444; color: #fff; border-radius: 4px;"></textarea>
-        </div>
+<!-- Contact Modal -->
+<div class="modal" id="contactModal" onclick="closeContactModal()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h3 style="color: #D4AF37;">Contact NairobiPixel</h3>
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact">
+      <p hidden>
+        <label>Don’t fill this out: <input name="bot-field"></label>
+      </p>
+      <div style="margin-bottom: 15px;">
+        <label for="contactName">Name:</label>
+        <input type="text" id="contactName" name="name" required style="width: 100%; padding: 8px; background: #222; border: 1px solid #444; color: #fff; border-radius: 4px;">
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label for="contactEmail">Email:</label>
+        <input type="email" id="contactEmail" name="email" required style="width: 100%; padding: 8px; background: #222; border: 1px solid #444; color: #fff; border-radius: 4px;">
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label for="serviceInterest">What service are you interested in?</label>
+        <select id="serviceInterest" name="interest" required style="width: 100%; padding: 8px; background: #222; border: 1px solid #444; color: #fff; border-radius: 4px;">
+          <option value="" disabled selected>Select a service</option>
+          <option value="Web Development">Web Development</option>
+          <option value="Branding">Branding</option>
+          <option value="Social Media Management">Social Media Management</option>
+          <option value="Paid Ads">Paid Ads</option>
+          <option value="All Services">All Services</option>
+        </select>
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label for="contactMessage">Message:</label>
+        <textarea id="contactMessage" name="message" rows="4" required style="width: 100%; padding: 8px; background: #222; border: 1px solid #444; color: #fff; border-radius: 4px;"></textarea>
+      </div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
         <button type="submit" style="background-color: #D4AF37; color: #111; padding: 10px 20px; font-weight: bold; border: none; border-radius: 4px; cursor: pointer;">Send Message</button>
-        <button type="button" onclick="closeContactModal()" style="margin-left: 10px; background-color: #333; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Cancel</button>
-      </form>
-    </div>
+        <button type="button" onclick="closeContactModal()" style="background-color: #333; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Cancel</button>
+        <a href="https://wa.me/254700370377" target="_blank" style="background-color: #25D366; padding: 10px 20px; color: #fff; font-weight: bold; border-radius: 4px; text-decoration: none; display: inline-block;">Chat on WhatsApp</a>
+      </div>
+    </form>
   </div>
+</div>
   
   <script>
     function toggleMenu() {
