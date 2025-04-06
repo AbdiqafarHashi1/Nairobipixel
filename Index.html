@@ -57,7 +57,7 @@
     /* Header */
     header {
       background: #000;
-      padding: 0 0;
+      padding: 20px 0;
       position: sticky;
       top: 0;
       z-index: 999;
@@ -649,6 +649,7 @@
       </div>
       <div class="pricing-grid">
         <div class="pricing-card">
+          <i class="fas fa-rocket" style="font-size: 2rem; color: #D4AF37; margin-bottom: 10px;"></i>
           <h3>Starter Launch</h3>
           <p class="price" data-usd="149">$149</p>
           <ul>
@@ -663,6 +664,7 @@
         </div>
       
         <div class="pricing-card">
+          <i class="fas fa-chart-line" style="font-size: 2rem; color: #D4AF37; margin-bottom: 10px;"></i>
           <h3>Growth Booster</h3>
           <p class="price" data-usd="299">$299</p>
           <ul>
@@ -670,7 +672,7 @@
             <li>Full Branding Kit (Logo, Colors, Fonts)</li>
             <li>2 Weeks Social Media Management</li>
             <li>8 Custom Social Media Posts</li>
-            <li>5 Paid Ad Campaign (FB/IG)</li>
+            <li>5 Paid Ad Campaigns (FB/IG)</li>
             <li>Basic SEO + Google Analytics</li>
             <li>Contact Form / WhatsApp Chat Integration</li>
           </ul>
@@ -678,6 +680,7 @@
         </div>
       
         <div class="pricing-card">
+          <i class="fas fa-crown" style="font-size: 2rem; color: #D4AF37; margin-bottom: 10px;"></i>
           <h3>Business Max Pro</h3>
           <p class="price" data-usd="499">$499</p>
           <ul>
@@ -693,9 +696,22 @@
           <button onclick="openPricingModal('Business Max Pro')">Select Max Pro</button>
         </div>
       </div>
-      
+      <!-- Testimonials Below Pricing -->
+<div style="margin-top: 60px;">
+  <h2 class="gold" style="text-align: center; margin-bottom: 30px;">Client Testimonials</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+    <div style="background:#111; padding: 30px; border-radius: 8px;">
+      <p style="font-style: italic; color: #ccc;">“We launched our business online with NairobiPixel. The results were immediate — customers kept coming.”</p>
+      <p style="color: #D4AF37; font-weight: 600; margin-top: 10px;">— Zubair from Laas Coffee</p>
     </div>
-  </section>
+    <div style="background:#111; padding: 30px; border-radius: 8px;">
+      <p style="font-style: italic; color: #ccc;">“The website, branding, and IG strategy worked perfectly. We made sales within the first week.”</p>
+      <p style="color: #D4AF37; font-weight: 600; margin-top: 10px;">— Saida from Urban Flame</p>
+    </div>
+  </div>
+</div>
+
+        </section>
   
   <!-- About Section -->
   <section id="about" class="fade-out">
@@ -952,19 +968,25 @@
         exchangeRateKES = 130;
       }
     }
-    function toggleCurrency() {
-      const selectedCurrency = document.getElementById("currencyToggle").value;
-      const priceTags = document.querySelectorAll(".price");
-      priceTags.forEach(tag => {
-        const usd = parseFloat(tag.dataset.usd);
-        if (selectedCurrency === "USD") {
-          tag.textContent = `$${usd}`;
-        } else {
-          const kes = Math.round(usd * exchangeRateKES);
-          tag.textContent = `Ksh ${kes}`;
-        }
-      });
-    }
+   
+  function toggleCurrency() {
+  const selectedCurrency = document.getElementById("currencyToggle").value;
+  const priceTags = document.querySelectorAll(".price");
+  priceTags.forEach(tag => {
+    tag.style.opacity = 0.2;
+    setTimeout(() => {
+      const usd = parseFloat(tag.dataset.usd);
+      if (selectedCurrency === "USD") {
+        tag.textContent = `$${usd}`;
+      } else {
+        const kes = Math.round(usd * exchangeRateKES);
+        tag.textContent = `Ksh ${kes}`;
+      }
+      tag.style.opacity = 1;
+    }, 200);
+  });
+}
+
     fetchExchangeRate().then(() => { toggleCurrency(); });
   
     const themeToggle = document.getElementById('themeToggle');
